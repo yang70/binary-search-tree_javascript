@@ -1,6 +1,19 @@
 var expect = require('chai').expect;
 var Bst = require('../lib/bst');
 
+var compareArrays = function(array1, array2){
+  if(array1.length != array2.length){
+    return false;
+  }else{
+    for(i = 0; i < array1.length; i++){
+      if(array1[i] != array2[i]){
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
 describe("create a new binary search tree and test it's methods", function(){
   it("should create a tree with a value and null left/right nodes", function(){
     var testBst = new Bst(5, true);
@@ -63,5 +76,45 @@ describe("create a new binary search tree and test it's methods", function(){
     expect(testBst6.balance()).to.equal(-1);
     testBst6.insert(8);
     expect(testBst6.balance()).to.equal(-2);
+  })
+
+  it("should return the values in order, in an array", function(){
+    var testBst7 = new Bst(4, true);
+    var results7 = [1,2,3,4,5]
+    testBst7.insert(5);
+    testBst7.insert(2);
+    testBst7.insert(3);
+    testBst7.insert(1);
+    expect(compareArrays(testBst7.in_order(), results7)).to.equal(true);
+  })
+
+  it("should return the values in pre-order, in an array", function(){
+    var testBst8 = new Bst(4, true);
+    var results8 = [4,2,1,3,5]
+    testBst8.insert(5);
+    testBst8.insert(2);
+    testBst8.insert(3);
+    testBst8.insert(1);
+    expect(compareArrays(testBst8.pre_order(), results8)).to.equal(true);
+  })
+
+  it("should return the values in post-order, in an array", function(){
+    var testBst9 = new Bst(4, true);
+    var results9 = [1,3,2,5,4]
+    testBst9.insert(5);
+    testBst9.insert(2);
+    testBst9.insert(3);
+    testBst9.insert(1);
+    expect(compareArrays(testBst9.post_order(), results9)).to.equal(true);
+  })
+
+  it("should return the values in breadth-first order, in an array", function(){
+    var testBst10 = new Bst(4, true);
+    var results10 = [4,2,5,1,3]
+    testBst10.insert(5);
+    testBst10.insert(2);
+    testBst10.insert(3);
+    testBst10.insert(1);
+    expect(compareArrays(testBst10.breadth_first(), results10)).to.equal(true);
   })
 })

@@ -1,0 +1,22 @@
+{
+  "name": "binary-search-tree_javascript",
+  "version": "1.0.0",
+  "description": "Binary Search Tree in JavaScript",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yang70/binary-search-tree_javascript.git"
+  },
+  "author": "Matthew Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yang70/binary-search-tree_javascript/issues"
+  },
+  "homepage": "https://github.com/yang70/binary-search-tree_javascript#readme"
+}

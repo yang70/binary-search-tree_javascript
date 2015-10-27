@@ -31,5 +31,30 @@ Again like `size` and `depth`, `balance` is a recursive strategy that returns an
 ### `ToString`
 I also added a `toString` method which returns a string of all the `Bst` values concatenated together.  I created this primarily to make testing easier, and it does have some flaws including leading/trailing spaces and double spaces between each value.
 
+## Traversal
+A [tree traversal](https://en.wikipedia.org/wiki/Tree_traversal) is a method of returning the values of the tree in a specific order
+### Depth-first
+There are three different depth-first tree traversals.  Each of these variations of the same recursive strategy used several times in the other methods above.  The reason they lend themselves to recursive solutions is because of the depth-first idea, meaning the algorithm recurses all the way to the bottom before returning values on the way back up.  The three variations below just return the values in a different order.  Given a `Bst` with 3 members (self, left branch, right branch), the methods return values as follows:
+
+* Pre-order traversal - self, left, right
+* In-order traversal - left, self, right
+* Post-order traversal - left, right, self
+
+### Breadth-first
+Breadth first is easy enough to understand, it returns value for each level, starting at the root, then moves to the next level down, returning values from left to right.
+
+Programming this, however, turned out to be much more difficult.  It does not lend itself to a recursive solution since it starts at the top, rather than the bottom of the tree.  I found a good explanation [here](http://stackoverflow.com/a/5262455) that helped me come up with my solution.
+
+I first created an array and set `this` (the `root`) to the only value.  I then set up a for loop that would continue to iterate through the array as long as there were items in it.  I then push the value of the first element in the array (only the root at the moment) into a new `results` array.  Still within the loop, I then push the left and right branches of the current `Bst` into the back of the first array as long as they have a value (they aren't `null` value 'leaves').  Those `Bst`s are then iterated, pushing their values to `results` and adding their children to the first array, if they exist.
+
+After all elements are iterated over and the first array is empty, I return the `results` array, which will have all the tree's values ordered breadth-first.
+
 ## Testing
 There is a full test suite incorporating [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/).
+
+For the traversal tests (`in_order`, `pre_order`, `post_order` and `breadth_first`) I was running into issues comparing whether arrays were equal or not.  They seemed to look equal to me, however they were returning false in testing.  In order to get around this I implemented a `compareArrays` function in the test file that takes two arrays and iterates through, returning `false` if their lengths are different, or if when comparing the values at the same index are different returning `false` as well.  If it makes it through both arrays it will then return `true`.
+
+## Credit
+[Tree Traversals: Wikipedia](https://en.wikipedia.org/wiki/Tree_traversal)
+
+[Breadth First: Stack Overflow](http://stackoverflow.com/a/5262455)
